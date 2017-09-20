@@ -1,0 +1,78 @@
+<div class="panel panel-default tile">
+	<div class="panel-heading">
+		<h3 class="panel-title">Gerät {{mode}}</h3>
+	</div>
+	<div>
+		<form>
+			<input type="hidden" id="deviceid" value="{{device.deviceid}}">
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon" id="name">Name</span>
+					<input type="text" class="form-control" placeholder="Name" ng-model="device.name" id="name" aria-describedby="name">
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">Buttontitel an</span>
+					<input type="text" class="form-control" placeholder="Name/Anschaltbutton" ng-model="device.buttonLabelOn" id="buttonLabelOn" aria-describedby="basic-addon1">
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon" id="buttonLabelOff">Buttontitel aus</span>
+					<input type="text" class="form-control" placeholder="Name/Ausschaltbutton" ng-model="device.buttonLabelOff" id="buttonLabelOff" aria-describedby="name">
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon" id="CodeOn">Einschaltcode</span>
+					<input type="text" class="form-control" placeholder="On-Code/Masterdip" ng-model="device.CodeOn" id="CodeOn" aria-describedby="CodeOn">
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon" id="CodeOff">Ausschaltcode</span>
+					<input type="text" class="form-control" placeholder="Off-Code/Slavedip" ng-model="device.CodeOff" id="CodeOff" aria-describedby="CodeOff">
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon" id="room">Raum</span>
+					<select class="form-control" ng-model="device.roomid" ng-options="obj.id as obj.name for obj in rooms"></select>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon">Zeige den Status</span>
+					<span class="form-control">
+						<input type="checkbox" ng-model="device.showStatus" ng-true-value="1" ng-false-value="0" ></input>
+					</span>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon" id="protocol">Protokoll</span>
+					<select class="form-control" ng-model="device.protocol" ng-options="obj.id as obj.name for obj in options" aria-describedby="protocol"></select>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon" id="switchserver">Switchserver</span>
+					<select
+						class="form-control"
+						ng-model="device.switchserver"
+						ng-options="server.id as server.name for server in switchServer"
+						aria-describedby="switchserver"
+						>
+					</select>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="pull-right">
+					<button class="btn btn-success" ng-click="submitnew()">Speichern</button>
+					<button class="btn btn-danger" ng-click="abort('/devices')">Abbrechen</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

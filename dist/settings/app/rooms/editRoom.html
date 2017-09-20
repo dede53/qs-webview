@@ -1,0 +1,22 @@
+<div class="panel panel-default tile">
+	<div class="panel-heading">
+		<h3 class="panel-title">Raum {{title}}</h3>
+	</div>
+	<div>
+		<form>
+			<input type="hidden" id="id" value="{{room.id}}">
+			<div class="panel-body">
+				<div class="input-group">
+					<span class="input-group-addon" id="name">Name</span>
+					<input type="text" class="form-control" placeholder="Name" ng-model="room.name" id="name" aria-describedby="name">
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="pull-right">
+					<button class="btn btn-success" ng-click="saveRoom()">Speichern</button>
+					<button class="btn btn-danger" ng-click="abort('/rooms')">Abbrechen</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

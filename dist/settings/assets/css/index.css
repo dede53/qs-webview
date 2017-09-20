@@ -1,0 +1,80 @@
+body{
+	background-image: url('../img/purty_wood.png');
+	background-repeat: repeat-y repeat-x;
+	background-attachment: fixed;
+	overflow-y: scroll;
+	font-family: "Open Sans",sans-serif !important;
+	cursor: context-menu;
+}
+ul, ol{
+	list-style-type: none;
+	padding: 0px;
+	margin:0px;
+}
+
+.tile {
+	width: 80%;
+	padding: 0px;
+	margin: auto;
+	margin-top: 20px;
+}
+.grey{
+	color:#bbb;
+}
+.green{
+	color:green;
+}
+.menu {
+	background-color: #ddf;
+	padding:10px 20px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index:200;
+	color: #2A6496 ;
+}
+.chart{
+	min-height: 500px;
+	padding:0px;
+	margin:10px;
+}
+a{
+	cursor:pointer;
+	text-decoration: none !important;
+	color: inherit !important;
+}
+a:hover{
+	text-decoration: none;
+}
+
+.menu a:hover{
+	background-color: #ddf;
+}
+
+
+.clear {
+	clear: both;
+}
+.float_left{
+	float:left;
+}
+.left{
+	float:left;
+}
+.right{
+	text-align: right;
+}
+.span9{
+	height:700px;
+}
+
+#mainContent{
+	margin-top:120px;
+	padding: 0 20px;
+}
+
+h1{
+	color: red;
+	text-align: center;
+	margin: 0;
+}
