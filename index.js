@@ -16,10 +16,10 @@ if(webview.settings.useHTTPS){
 	var app						=	express().http().io();
 }
 
-app.use(express.static('/home/pi/QuickSwitch2.0/SwitchServer/adapter/webview/dist'));		// provides static htmls
+app.use(express.static(__dirname + '/dist'));		// provides static htmls
 
 app.get('/pc', function(req, res) {
-	res.sendFile('/home/pi/QuickSwitch2.0/SwitchServer/adapter/webview/dist/index.html');
+	res.sendFile(__dirname + '/dist/index.html');
 });
 
 try{
@@ -27,5 +27,5 @@ try{
 		process.send({"statusMessage": "Läut auf Port:" + webview.settings.port});
 	});
 }catch(e){
-    console.log("Port besetzt");
+    webview.log.error("Port besetzt");
 }
