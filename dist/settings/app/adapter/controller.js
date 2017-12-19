@@ -46,6 +46,22 @@ app.controller('adapterController',  function($scope, $rootScope, socket, $uibMo
 	}
 	$scope.updateAdapterList = function(switchServer){
 		switchServer.connection.emit('SwitchServer:updateAdapterList');
+    }
+    $scope.openLog = function(adapter, switchServer){
+		var modalInstance = $uibModal.open({
+			animation: true,
+			templateUrl: "./app/adapter/template-log.html",
+			controller: "adapterLogController",
+			size: 'lg',
+			resolve: {
+				adapter: function(){return adapter}
+			}
+		});
+		modalInstance.result.then(function(data) {
+            ;
+		}, function () {
+			;
+		});
 	}
 	$scope.openSettings = function(adapter, switchServer){
 		var modalInstance = $uibModal.open({
@@ -65,6 +81,18 @@ app.controller('adapterController',  function($scope, $rootScope, socket, $uibMo
 	}
 });
 app.controller('adapterSettingsController', function($scope, adapter, $uibModalInstance){
+	$scope.adapter = adapter;
+	$scope.getTypeof = function(data){
+		return typeof data;
+	}
+	$scope.saveSettings = function (data) {
+		$uibModalInstance.close(data);
+	};
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
+})
+app.controller('adapterLogController', function($scope, adapter, $uibModalInstance){
 	$scope.adapter = adapter;
 	$scope.getTypeof = function(data){
 		return typeof data;
