@@ -834,7 +834,7 @@ var ServerResponse = (function () {
 var SocketService = (function () {
     function SocketService() {
         var _this = this;
-        this.url = "http://" + window.location.hostname + ":1230";
+        this.url = "http://" + window.location.hostname + ":3333";
         // private url = 'http://192.168.2.47:1230';
         this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(this.url);
         this.observable = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"](function (observer) {
