@@ -1,0 +1,58 @@
+<div class="card">
+    <!--<div class="card-header">-->
+    <!--</div>-->
+    <div class="card-body">
+        <h3>Countdowns</h3>
+        <ul class="list-group" style="max-height:230px; overflow:auto;">
+            <li class="list-group-item d-flex justify-content-start" *ngFor="let countdown of globalVar.user.countdowns | ObjNgFor">
+                <span>{{countdown.device.name}} ({{countdown.device.Raum}}) um {{countdown.time | date:'HH:mm'}} {{countdown.status ? countdown.device.buttonLabelOn :  countdown.device.buttonLabelOff}}</span>
+                <button class="btn btn-sm btn-danger ml-auto" (click)="remove(countdown)" >Löschen</button>
+            </li>
+            <li class="list-group-item list-group-item-info" *ngIf="globalVar.user.countdowns | isEmpty">
+                Keine Countdowns gesetzt
+            </li>
+        </ul>
+        <form style="text-align:right;" [formGroup]="myForm" (ngSubmit)="add(myForm.value, myForm.valid)">
+            <br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Gerät</span>
+                </div>
+                <select
+                    class="form-control"
+                    formControlName="device"
+                    aria-describedby="btnGroupAddon">
+                    <option value="">Wähle ein Gerät</option>
+                    <option *ngFor="let value of globalVar.user.devicelist | ObjNgFor" [ngValue]="value">{{value.name}} ({{value.Raum}})</option>
+                </select>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Minuten: {{myForm.value.time}}</span>
+                </div>
+                <input
+                formControlName="time"
+                type="range"
+                min="1"
+                max="180"
+                class="form-control slider"
+                aria-describedby="btnGroupAddon2">
+            </div>
+            <br>
+			<div class="btn-group btn-group-sm mr-3">
+				<label class="btn btn-secondary" [ngClass]="{active: myForm.value.status == '1'}">
+					<input type="radio" formControlName="status" class="custom-control-input" value="1">
+					{{myForm.value.device.buttonLabelOn || 'An'}}
+				</label>
+				<label class="btn btn-secondary" [ngClass]="{active: myForm.value.status == '0'}">
+					<input type="radio" formControlName="status" class="custom-control-input" value="0">
+					{{myForm.value.device.buttonLabelOff || 'Aus'}}
+				</label>
+			</div>
+            <label class="btn-group btn-group-sm">
+                <button type="submit" class="btn btn-secondary ">Speichern</button>
+            </label>
+        </form>
+    </div>
+</div>

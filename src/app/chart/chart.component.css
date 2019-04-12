@@ -1,0 +1,39 @@
+.numberInput{
+    max-width:80px;
+    min-width:80px;
+}
+
+highcharts-chart {
+    display: block;
+    height: 500px;
+}
+.test{
+	-webkit-flex-flow: row wrap;
+	-ms-flex-flow: row wrap;
+	flex-flow: row wrap;
+}
+
+h3{
+    cursor:default;
+}
+
+.btn-secondary{
+    background-color: #c0d7ff;
+    border-color: #c0d7ff;
+    color: black;
+}
+.btn-secondary:hover{
+    background-color: #c0d7ff80;
+    border-color: #c0d7ff;
+    color: black;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle{
+    background-color: #c0d7ff80;
+    border-color: #c0d7ff;
+    color: black;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show > .btn-secondary.dropdown-toggle:focus{
+    box-shadow: none;
+}

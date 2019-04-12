@@ -1,0 +1,294 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+
+import { GlobalObjectsService } from "../app.service.global";
+import { SocketService } from "../app.service";
+
+@Component({
+  selector: 'app-timer-edit',
+  templateUrl: './timer-edit.component.html',
+  styleUrls: ['./timer-edit.component.css']
+})
+export class TimerEditComponent implements OnInit {
+
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        public globalVar: GlobalObjectsService,
+        private socket: SocketService,
+        private formBuilder: FormBuilder){}
+        
+    actions = [
+        {value:"device", name:"Gerät"},
+        {value:"group", name:"Gruppe"},
+        {value:"room", name:"Raum"},
+        {value:"alert", name:"Alert"},
+        {value:"url", name:"Url aufrufen"},
+        {value:"setVariable", name:"Variablen Wert setzen"},
+		{value:"pushbullets", name:"Pushbulletbenachrichigung"}
+    ]
+    id:number;
+    timer:FormGroup;
+    
+    addActionType = "false";
+    addVariableType = "false";
+    addConditionType = "false";
+    variables: Array<object>;
+    ngOnInit() {
+        this.id = parseInt(this.route.snapshot.paramMap.get('id')) || undefined;
+
+        this.timer = this.formBuilder.group({
+            name: [''],
+            id: [''],
+            variables: false,
+            conditions: this.formBuilder.array([]),
+            actions: this.formBuilder.array([]),
+            user: this.globalVar.activeUser.name
+        });
+
+        if(this.id){
+            this.socket.emit("timers:get", {"get":this.id});
+            this.socket.on('timer', data => {
+                console.log(data);
+                if(this.id === parseInt(data[data.type].id)){
+                    this.timer.get('variables').setValue(this.formBuilder.group(data[data.type].variables), {onlySelf:true});
+                    this.timer.get('actions').setValue(this.formBuilder.array(data[data.type].actions), {onlySelf:true});
+                    this.timer.get('conditions').setValue(this.formBuilder.array(data[data.type].conditions), {onlySelf:true});
+                    this.timer.get('name').setValue(data[data.type].name);
+                    this.timer.get('id').setValue(data[data.type].id);
+                    this.timer.get('user').setValue(data[data.type].user);
+                }
+            });
+        }
+        this.socket.emit("variables:get", "");
+        this.socket.on("variables", data => {
+            if(data.type == "get"){
+                this.variables = data.get;
+            }
+        });
+    }
+
+    addAction(type){
+        if(type  != "false"){
+            if(!this.timer.value.actions){
+                this.timer.controls['actions'] = this.formBuilder.array([]);
+            }
+            <FormArray>this.timer.controls['actions'].push(this.formBuilder.group({
+                type: type,
+                activeInterval: false,
+                unit: "min",
+                number: 5,
+                switchstatus: false,
+                action: this.formBuilder.group({}),
+                offset: this.formBuilder.group({
+                    active:false,
+                    random: false,
+                    after:true,
+                    min:2,
+                    max:5,
+                    minutes:4
+                })
+            }));
+        }
+    }
+    addVariable(id){
+        if(id != "false"){
+            if(!this.timer.value.variables){
+                this.timer.controls['variables'] = this.formBuilder.group({});
+            }
+            if(!this.timer.value.variables[id]){
+                console.log(this.timer.controls['variables']);
+                this.timer.controls['variables'][id] = this.formBuilder.array([]);
+            }
+            this.timer.value.variables[id].push(this.formBuilder.group({
+                id:id,
+                mode:"onChange"
+            }));
+        }
+    }
+    addCondition(type){
+        if(type != "false"){
+            if(!this.timer.value.conditions){
+                this.timer.value.conditions = this.formBuilder.array([]);
+            }
+            <FormArray>this.timer.controls['conditions'].push(this.formBuilder.group({
+                type:type,
+                time: new Date().toISOString(),
+                value:"",
+                mode:"",
+                id:"",
+                start:new Date().toISOString(),
+                stop:new Date().toISOString(),
+                sun:"",
+                offset: this.formBuilder.group({
+                    active:true,
+                    random: false,
+                    after:true,
+                    min:2,
+                    max:5,
+                    minutes:4
+                }),
+                weekdays: this.formBuilder.array([true,true,false,false,false,false,false])
+            }));
+        }
+    }
+    removeAction(index){
+        this.timer.controls['actions'].removeAt(index);
+
+    }
+    removeCondition(index){
+        this.timer.controls['conditions'].removeAt(index);
+    }
+    removeVariable(id, index){
+        this.timer.controls['variables'][id].removeAt(index, 1);
+        if(this.timer.controls['variables'][id].length == 0){
+            delete this.timer.controls['variables'][id];
+        }
+        for(let index in this.timer.value.variables){
+            if (this.timer.value.variables.hasOwnProperty(index)) {
+                return;
+            }
+        }
+        this.timer.value.variables = false;
+    }
+    save(){
+        console.log(this.timer.value);
+        this.socket.emit('timers:save', {user:this.globalVar.activeUser, save: this.timer.value});
+        this.router.navigate(['/timers']);
+    }
+    cancel(){
+        this.router.navigate(['/timers']);
+    }
+
+	switchAll = function(type, data){
+		this.socket.emit(type + ':switchAll', {user:this.globalVar.activeUser, switchAll: data});	
+	}
+    variableModes = [
+        {value:"match", name:"match (deprected)"},
+        {value:"onChange", name:"sich ändert (onChange)"},
+        {value:"größer", name:"größer als"},
+        {value:"kleiner", name:"kleiner als"},
+        {value:"gleich", name:"gleich"},
+        {value:"ungleich", name:"ungleich"},
+        {value:"kleinergleich", name:"kleiner oder gleich"},
+        {value:"größergleich", name:"größer oder gleich"}
+    ]
+    conditions = [
+        {value:"range", name:"Zeitraum"},
+        {value:"sun", name:"Sonnenaufgang/Untergang"},
+        {value:"random", name:"Zufälliger Zeitpunkt in einem Zeitraum"},
+        {value:"variable", name:"Wert einer Variable"},
+        {value:"time", name:"Zeit"},
+        {value:"weekdays", name:"Wochentage"}
+    ]
+}
+
+
+@Component({
+    selector: 'app-timer-group',
+    styleUrls: ['./timer-edit.component.css'],
+    templateUrl: './templates/action-group.html'
+})
+export class TimerGroupComponent{
+    @Input() action: any;
+    constructor(
+        private socket: SocketService,
+        public globalVar: GlobalObjectsService
+    ){}
+    groups = {};
+    ngOnInit(){
+        this.socket.emit("groups:getAll", "");
+        this.socket.on("groups", data => {
+            this.groups = data.get;
+            if(this.action.action.id && this.action.action != this.groups[this.action.action.id]){
+                this.action.action = this.groups[this.action.action.id];
+            }
+        });
+    }
+}
+
+
+@Component({
+  selector: 'app-timer-device',
+  styleUrls: ['./timer-edit.component.css'],
+  templateUrl: './templates/action-device.html'
+})
+export class TimerDeviceComponent {
+    @Input() action: any;
+    devicelist:Array<object>;
+    constructor(
+        private socket: SocketService
+    ){}
+    ngOnInit(){
+        this.socket.emit("devices:devicelist", "");
+        this.socket.on("devicelist", data => {
+            this.devicelist = data.get;
+            if(this.action.action.deviceid && this.action.action != this.devicelist[this.action.action.deviceid]){
+                this.action.action = this.devicelist[this.action.action.deviceid];
+            }
+        });
+    }
+}
+
+@Component({
+  selector: 'app-timer-alert',
+  styleUrls: ['./timer-edit.component.css'],
+  templateUrl: './templates/action-alert.html'
+})
+export class TimerAlertComponent {
+    @Input() action: any;
+    constructor(
+        private socket: SocketService,
+        public globalVar: GlobalObjectsService
+    ){}
+    alertTypen = [
+        {value:'primary', name:'Blau/Primary'},
+        {value:'info', name:'Hellblau/Info'},
+        {value:'success', name:'Grün/Success'},
+        {value:'warning', name:'Gelb/Warning'},
+        {value:'danger', name:'Rot/Danger'},
+        {value:'secondary', name:'Weiß/Default'}
+    ]
+}
+
+
+@Component({
+    selector: 'app-timer-room',
+    styleUrls: ['./timer-edit.component.css'],
+    templateUrl: './templates/action-room.html'
+})
+export class TimerRoomComponent{
+    @Input() action: any;
+    constructor(
+        private socket: SocketService,
+        public globalVar: GlobalObjectsService
+    ){}
+    devices = {};
+    ngOnInit(){
+        this.socket.emit("devices:get", "");
+        this.socket.on("devices", data => {
+            this.devices = data.get;
+            if(this.action.action.id && this.action.action != this.devices[this.action.action.id]){
+                this.action.action = this.devices[this.action.action.id];
+            }
+        });
+    }
+}
+
+// @Component({
+//     selector: 'app-timer-condition-variable',
+//     styleUrls: ['./timer-edit.component.css'],
+//     templateUrl: './templates/condition-variable.html'
+// })
+// export class TimerConditionVariableComponent{
+//     @Input() condition: any;
+//     constructor(
+//         private socket: SocketService,
+//         public globalVar: GlobalObjectsService
+//     ){}
+//     devices = {};
+//     variables: Array<object>;
+//     ngOnInit(){
+//     }
+// }

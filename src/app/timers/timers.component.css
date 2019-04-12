@@ -1,0 +1,25 @@
+.inactiveTimer{
+    color:#ffc0c0;
+}
+.activeTimer{
+    color:lightgreen;
+}
+.ngbPanelTitle:hover{
+    text-decoration: none!important;
+    cursor: default;
+}
+a:active, a:hover{
+    text-decoration: none!important;
+    cursor: default;
+}
+.card-header a:hover{
+    text-decoration: none!important;
+}
+.accordion-toggle, .accordion-toggle:hover{
+    color:red;
+    text-decoration: inherit;
+}
+
+h3{
+    cursor: default;
+}

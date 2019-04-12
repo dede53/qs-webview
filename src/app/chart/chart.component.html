@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-body test d-flex justify-content-end">
+        
+        <h3 class="mr-auto">Chart</h3>
+        <div class="">
+            <div class="btn-group justify-content-end">
+                <button type="button" class="btn btn-secondary" (click)="getTempHistory(24)" [ngClass]="{active:globalVar.activeUser.chartHour === 24}" autocomplete="off" >24h</button>
+                <button type="button" class="btn btn-secondary" (click)="getTempHistory(48)" [ngClass]="{active:globalVar.activeUser.chartHour === 48}" autocomplete="off" >48h</button>
+                <button type="button" class="btn btn-secondary" (click)="getTempHistory(96)" [ngClass]="{active:globalVar.activeUser.chartHour === 96}" autocomplete="off" >96h</button>
+                <input type="number" class="form-control btn btn-secondary numberInput" min="0" [(ngModel)]="hours">
+                <button type="button" class="btn btn-secondary" (click)="getTempHistory(hours)">Los!</button>
+                <i class="material-icons btn btn-secondary" title="Reset Zoom" (click)="globalVar.user.chart.zoomOut()">zoom_out</i>
+            </div>
+        </div>
+    </div>
+    <!-- <chart *ngIf="!globalVar.user.hideChart" [options]="globalVar.user.chartOptions" (load)="saveInstance($event.context)"></chart>
+     -->
+    <highcharts-chart
+    *ngIf="!globalVar.user.hideChart"
+        [Highcharts]="Highcharts"
+        [options]="globalVar.user.chartOptions"
+        [(update)]="globalVar.user.updateFlag"
+        (chartInstance)="saveInstance($event)"
+    ></highcharts-chart>
+    <div *ngIf="globalVar.activeUser.varChart.length == 0" class="card-body">
+        <!-- <div *ngIf="globalVar.user.hideChart && globalVar.activeUser.varChart.length > 0" role="alert" class="alert alert-info"> -->
+            <!-- Unterumständen keine Daten verfügbar. Ist die speicher-Funktion der Variablen aktiviert? -->
+        <!-- </div> -->
+        <div role="alert" class="alert alert-info">
+            Du hast in den Einstellungen keine Datenpunkte für das Diagram ausgewählt.
+        </div>
+    </div>
+    <!-- <chart [options]="globalVar.user.chartOptions" (load)="saveInstance($event.context)"></chart>  -->
+    <!-- <chart *ngIf="globalVar.activeUser.varChart.length > 0" [options]="globalVar.user.chartOptions" (load)="saveInstance($event.context)"></chart>  -->
+    <!-- <chart [options]="globalVar.user.chartOptions" type="StockChart"></chart> -->
+</div>

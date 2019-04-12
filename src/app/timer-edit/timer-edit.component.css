@@ -1,0 +1,26 @@
+.red{
+    background:red;
+    border-radius: 40px;
+    width:40px;
+    height: 40px;
+    -moz-border-radius: 50px/50px;
+    -webkit-border-radius: 50px 50px;
+    border-radius: 50px/50px;
+    border:none;
+    margin-left:5px;
+}
+
+.material-icons {
+    margin-top: auto;
+}
+
+.points{
+    position:relative;
+    top: 6px;
+    left: 6px;
+    color:white;
+}
+
+.right{
+    text-align: right;
+}

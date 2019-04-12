@@ -1,0 +1,19 @@
+<div class="card w-100  bg-{{action.action.type}}">
+    <div class="card-header d-flex justify-content-end">
+            <input [(ngModel)]="action.action.title" class="mr-auto" type="text" placeholder="Titel">
+            <select name="activeUser" [(ngModel)]="action.action.user">
+                <option value="undefined" disabled>Benutzer</option>
+                <option value="all">Alle</option>
+                <option *ngFor="let user of globalVar.user.users;" [ngValue]="user.name">
+                    {{ user.name }}
+                </option>
+            </select>
+            <select name="alertType" [(ngModel)]="action.action.type">
+                <option value="undefined" disabled>Farbe</option>
+                <option *ngFor="let type of alertTypen" [ngValue]="type.value">{{type.name}}</option>
+            </select>
+    </div>
+    <p class="m-2 card-block card-text text-xs-center">
+        <input [(ngModel)]="action.action.message" class="col-form-label w-100" type="text" placeholder="Nachricht">
+    </p>
+</div>

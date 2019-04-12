@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+i{
+    cursor:pointer;
+	color: #4d5cad;
+}
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-62 { font-size: 62px; }
+
+a:focus, a:hover, a, button:focus, button:hover, input:focus, input:hover{
+	outline:none !important;
+}
+
+body{
+	font-family: sans-serif!important;
+    font-weight: 400!important;
+    overflow:hidden;
+}
+
+p, ul, ol, li, span, h1, h2, h3, h4,h5, h6, small, select{
+	font-family: sans-serif!important;
+	font-weight: 400!important;
+}
+
+.btnOn{
+	background-color:#c0ffc0;
+	background-color: #c0d7ff;
+	/*width: 25%;*/
+}
+.btnOff{
+	background-color:#ffc0c0;
+	background-color: #c0d7ff;
+	/*width: 25%;*/
+}
+.boxOn{
+	margin:auto 0;
+	color:#4dad4d;
+	color: #4d5cad;
+	size:10px
+}
+.boxOff{
+	margin:auto 0;
+	color:#fc6b6b;
+	color: #4d5cad;
+}
+
+.bg{
+/*     background-image: url('./assets/img/purty_wood.jpg');
+	position:fixed;
+    background-repeat: repeat-y repeat-x; */
+    /* background-image: url('./assets/img/14+-+5.png'); */
+	position:fixed;
+    background-size: cover;
+	background-color: #fff;
+}

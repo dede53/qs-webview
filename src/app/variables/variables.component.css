@@ -1,0 +1,10 @@
+ul, ol{
+	list-style-type: none;
+	padding: 0px !important;
+	margin:0px !important;
+	cursor: default;
+}
+
+h3{
+	cursor: default;
+}

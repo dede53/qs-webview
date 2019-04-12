@@ -1,0 +1,87 @@
+<!--<div (window:keydown)="onKey($event)">--><!-- #ddf -->
+<nav class="navbar navbar-light bg-faded fixed-top navbar-expand-lg" style="background-color: #bee5eb;" >
+    <a class="navbar-brand" (click)="toogleFav(showFav)" title="Favoritenliste ein- ausblenden">
+        <img src="assets/favicon.ico" width="35" height="35" alt="">
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="home" routerLinkActive="nav-link-active">
+                    <i class="material-icons">home</i>Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="devices" routerLinkActive="nav-link-active">
+                    <!-- <i class="material-icons">power_settings_new</i> -->
+                    <!-- <i class="material-icons">touch_app</i> -->
+                    <i class="material-icons">power</i>
+                    Geräte
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="timers" routerLinkActive="nav-link-active">
+                    <i class="material-icons">alarm</i>
+                    Timer
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="chart" routerLinkActive="nav-link-active">
+                    <i class="material-icons">bar_chart</i>
+                    Chart
+                </a>
+            </li>
+            <!-- <li class="nav-item">
+                    <a class="nav-link" routerLink="chat">Chat</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="modal">Modal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="date">Datepicker</a>
+                </li> -->
+        </ul>
+            <span dropdown>
+                <i class="material-icons" id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">account_circle</i>
+                <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu  dropdown-menu-right" role="menu" aria-labelledby="basic-link">
+                    <li class="px-3">Eingeloggt als {{globalVar.activeUser.name}}</li>
+                    <li class="divider dropdown-divider"></li>
+                    <li class="px-3">Anmelden als:</li>
+                    <li *ngFor="let user of users; index as i;" (click)="setUser(user)">
+                        <a class="dropdown-item" href="#"  *ngIf="user.name != globalVar.activeUser.name" style="display: flex;">
+                            <i class="material-icons">person</i>{{user.name}}
+                        </a>
+                    </li>
+                </ul>
+            </span>
+    </div>
+</nav>
+<div class="favorittile" *ngIf="showFav">
+    <app-favorit-devices></app-favorit-devices>
+    <app-active-devices></app-active-devices>
+</div>
+<app-alerts class="w-100"></app-alerts>
+<div class="content" [class.favoritmenu]="showFav">
+    <router-outlet></router-outlet>
+</div>
+<div class="bg" [style.background-image]="'url(' + globalVar.activeUser.background + ')'"></div>
+<div class="loaderBg" *ngIf="globalVar.loading">
+    <div class="loader">
+        <div class="inner mx-auto">
+            <div class="outer"></div>
+        </div>
+        <p class="">Verbinde zum Server...</p>
+    </div>
+</div>
+<!--<div class="loaderBg">
+    <div class="loader card">
+        <div class="card-header">
+        <p class="">Verbinde zum Server...</p>
+        </div>
+        <div class="card-block">
+        <div class="outer">
+            <div class="inner"></div>
+        </div>
+        </div>
+    </div>
+    </div>-->
+<!--</div>-->
