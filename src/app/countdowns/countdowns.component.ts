@@ -26,6 +26,11 @@ export class CountdownsComponent implements OnInit {
             console.log(this.globalVar.activeUser);
             countdown.user = this.globalVar.activeUser.name;
             this.socket.emit("countdowns:add", {user: this.globalVar.activeUser , add: countdown});
+            this.myForm = this._fb.group({
+                time: [2],
+                device: ['', Validators.required],
+                status: 0
+            });
         }
     }
     remove(data){
