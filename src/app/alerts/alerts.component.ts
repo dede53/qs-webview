@@ -13,6 +13,6 @@ export class AlertsComponent {
         this.socket.emit('alerts:remove', {user:this.globalVar.activeUser, remove: data});	
     }
     removeAll(){
-		this.socket.emit('alerts:removeAll', {user:this.globalVar.activeUser});
+		    this.socket.emit('alerts:removeAll', {user:this.globalVar.activeUser});
     }
 }

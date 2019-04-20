@@ -1,7 +1,7 @@
 <div *ngIf="globalVar.user.alerts | isEmpty:true" class="alerts w-100 d-flex justify-content-end">
     <ul>
         <li *ngFor="let alert of globalVar.user.alerts | ObjNgFor" (click)="remove(alert)">
-            <div class="card card-{{alert.type}}">
+            <div class="card bg-{{alert.messageType}}">
                 <div class="card-header d-flex justify-content-between">
                     <span class="card-text">
                         {{alert.title}}
@@ -10,7 +10,7 @@
                         {{alert.date | date:'dd.MMM., H:mm'}}
                     </p>
                 </div>
-                <p class="card-block card-text text-xs-center">
+                <p class="card-body card-text text-xs-center">
                     {{alert.message}}
                 </p>
             </div>
