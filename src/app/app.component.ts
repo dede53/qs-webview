@@ -165,7 +165,6 @@ export class AppComponent {
                     theme: {
                         display: "none"
                     }
-                    // relativeTo:"plot"
                 }
             },
             navigator: {
@@ -258,7 +257,6 @@ export class AppComponent {
                 title: {
                     text: 'Temperatur',
                     style: {
-                        // "color": '#80a3ca',
                         "color": '#4d4d4d',
                         "fontSize": "16px"
                     }
