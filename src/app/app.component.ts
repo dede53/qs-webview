@@ -218,10 +218,17 @@ export class AppComponent {
             },
             xAxis: [{
                 type: 'datetime',
+                lineColor:'#4d4d4d',
+                tickColor:'#4d4d4d',
+                minorGridLineWidth: 0,
+                minorTickInterval: 3600 * 1000, // Hourly
+                minorTickColor: '#4d4d4d',
+                minorTickWidth: 1,
+                minorTickLength: 7,
                 labels: {
                     rotation: 0,
                     style: {
-                        "color": '#80a3ca',
+                        "color": '#4d4d4d',
                         "fontSize": "16px"
                     }
                 },
@@ -246,17 +253,20 @@ export class AppComponent {
             yAxis: [{
                 allowDecimals: true,
                 opposite: true,
+                gridLineColor: '#4d4d4d',
+                lineColor: '#4d4d4d',
                 title: {
                     text: 'Temperatur',
                     style: {
-                        "color": '#80a3ca',
+                        // "color": '#80a3ca',
+                        "color": '#4d4d4d',
                         "fontSize": "16px"
                     }
                 },
                 labels: {
                     format: '{value}',
                     style: {
-                        "color": '#80a3ca',
+                        "color": '#4d4d4d',
                         "fontSize": "16px"
                     }
                 },
