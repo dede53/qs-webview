@@ -146,9 +146,12 @@ declare var require: any;
         pathMatch: 'full'
       }
     ],{
-      useHash: true
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      scrollOffset: [0, 64] // [x, y] - adjust scroll offset
     })
   ],
+  exports:[RouterModule],
   providers: [
     SocketService
     ,GlobalObjectsService

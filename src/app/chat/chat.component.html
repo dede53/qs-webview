@@ -3,9 +3,9 @@
 	<!--</div>-->
 	<div class="card-body">
 		<h3>Chat</h3>
-		<ul class="list-group" style="max-height:230px; overflow:auto;">
-			<li class="m-0" *ngFor="let message of globalVar.user.chatMessages">
-                <p class="sliderText" id="{{message.time}}">
+		<ul class="list-group" style="max-height:300px; overflow:auto;">
+			<li class="m-0" id="message{{message.time}}" *ngFor="let message of globalVar.user.chatMessages">
+                <p class="sliderText">
 <!--                     <span id="italic" title="{{message.time | date:'medium'}}">{{message.time}}:</span> {{message.author}}: -->
                     <span id="italic" title="{{message.time | date:'medium'}}">{{message.time | date:'d. MMM | HH:mm'}}:</span> {{message.author}}:
  				    <span *ngIf="message.type == '1'">
@@ -56,6 +56,8 @@
 			</div>
 			<label class="btn-group btn-group-sm">
 				<button class="btn btn-secondary" (click)="save()">Senden</button>
+				<button class="btn btn-secondary" (click)="scroll()">Scroll</button>
+				<a [routerLink]="['./']" fragment="message1556710620497" (click)="scroll()">Testing</a>
 			</label>
 		</form>
 

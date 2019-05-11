@@ -2,6 +2,7 @@ import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SocketService }            from '../app.service';
 import { GlobalObjectsService }     from "../app.service.global";
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-chat',
@@ -18,7 +19,7 @@ export class ChatComponent implements OnInit {
   };*/
   newMessage: FormGroup;
   showFullscreen = {};
-  constructor(private socket: SocketService, public globalVar: GlobalObjectsService, private formBuilder: FormBuilder) { }
+  constructor(private socket: SocketService, public globalVar: GlobalObjectsService, private formBuilder: FormBuilder, private viewportScroller: ViewportScroller) { }
 
     save(){
         if(this.newMessage.value.message == ""){
@@ -54,6 +55,12 @@ export class ChatComponent implements OnInit {
         
         */
         
+    }
+
+    scroll(){
+        // https://stackoverflow.com/questions/51010195/not-a-valid-selector-error-when-trying-to-link-to-a-section-within-the-current-p
+        this.viewportScroller.scrollToAnchor("message" + this.globalVar.user.chatMessages[this.globalVar.user.chatMessages.length - 1 ].time);
+        console.log("message" + this.globalVar.user.chatMessages[this.globalVar.user.chatMessages.length - 1 ].time);
     }
 
     loadOldMessages(){
