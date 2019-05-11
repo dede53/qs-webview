@@ -204,7 +204,16 @@ export class AppComponent {
                     marker: {
                         enabled: false
                     },
-                    animation: false
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineWidthPlus: 1.5
+                        },
+                        inactive: {
+                            opacity: 1
+                        }
+                    },
+                    animation: false // steht nur drin da TS sonst meckert => typing definieren: typings.d.ts
                 }
             },
             xAxis: [{
