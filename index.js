@@ -18,7 +18,7 @@ if(webview.settings.useHTTPS){
 
 app.use(express.static(__dirname + '/dist'));		// provides static htmls
 
-app.get('/pc', function(req, res) {
+app.get('/*', function(req, res) {
 	res.sendFile(__dirname + '/dist/index.html');
 });
 
