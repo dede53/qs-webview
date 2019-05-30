@@ -22,7 +22,7 @@
     display: flex;
     color: #4d5cad !important;
 }
-.navbar-brand{
+.pointer{
     cursor: pointer;
 }
 .content{
@@ -81,8 +81,7 @@
     -webkit-border-radius: 120px 120px;
     border-radius: 120px/120px;;
     border:solid 12px;
-    border-color: #bee5eb;
-    border-color: #fff;
+    border-color: #ffffff;
     width: 120px;
     height: 120px;
     top: -1px;

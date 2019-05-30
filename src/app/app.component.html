@@ -1,6 +1,6 @@
 <!--<div (window:keydown)="onKey($event)">--><!-- #ddf -->
 <nav class="navbar navbar-light bg-faded fixed-top navbar-expand-lg" style="background-color: #bee5eb;" >
-    <a class="navbar-brand" (click)="toogleFav(showFav)" title="Favoritenliste ein- ausblenden">
+    <a class="navbar-brand pointer" (click)="toogleFav(showFav)" title="Favoritenliste ein- ausblenden">
         <img src="assets/favicon.ico" width="35" height="35" alt="">
     </a>
     <div class="collapse navbar-collapse">
@@ -47,7 +47,7 @@
                     <li class="divider dropdown-divider"></li>
                     <li class="px-3">Anmelden als:</li>
                     <li *ngFor="let user of users; index as i;" (click)="setUser(user)">
-                        <a class="dropdown-item" href="#"  *ngIf="user.name != globalVar.activeUser.name" style="display: flex;">
+                        <a class="dropdown-item pointer" *ngIf="user.name != globalVar.activeUser.name" style="display: flex;">
                             <i class="material-icons">person</i>{{user.name}}
                         </a>
                     </li>
