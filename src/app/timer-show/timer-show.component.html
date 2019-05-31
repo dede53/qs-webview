@@ -30,7 +30,7 @@
                     <div *ngSwitchCase="'variable'">Wenn der Wert der Variablen {{con.id}} {{con.mode}} {{con.value}} ist</div>
                     <div *ngSwitchCase="'sun'">
                         {{con.sun == "sunset" ? "Sonnenuntergang" : "Sonnenaufgang"}}
-                        <div *ngIf="con.offset.active">{{con.offset.minutes}} {{con.offset.random}}{{con.offset.after}} {{con.offset.min}} {{con.offset.max}}</div> 
+                        <div *ngIf="con.offset.active" class="text-muted">{{con.offset.random ? 'zufällig zwischen ' + con.offset.min + ' und ' + con.offset.max : con.offset.minutes}} Minuten {{con.offset.after ? 'später': 'früher'}}</div> 
                     </div>
                     <div *ngSwitchCase="'weekdays'">
                         <span [ngClass]='day ? "green" :  "grey"'  *ngFor="let day of con.weekdays; index as i;">
