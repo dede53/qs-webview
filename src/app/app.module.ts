@@ -108,18 +108,6 @@ declare var require: any;
     // ChartModule.forRoot(Test124),
     HighchartsChartModule,
     RouterModule.forRoot([
-    //   {
-    //     path: 'chat',
-    //     component: ChatComponent
-    //   },
-    //   {
-    //     path: 'modal',
-    //     component: NgbdModalBasic
-    //   },
-    //   {
-    //     path: 'date',
-    //     component: NgbdDatepickerBasic
-    //   },
       {
         path: 'home',
         component: HomeComponent
