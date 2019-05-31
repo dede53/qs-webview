@@ -8,9 +8,9 @@
         <i class="material-icons" style="color:#666;"  title="Bearbeiten" (click)="$event.preventDefault();editTimer(timer.id);$event.stopPropagation();">mode_edit</i> 
         <ng-template #popContent>
             <button class="btn btn-danger" (click)="$event.preventDefault();removeTimer(timer);$event.stopPropagation();">Löschen</button>
-            <button class="btn btn-success" (click)="$event.preventDefault();p.close();$event.stopPropagation();">Abbrechen</button>
+            <button class="btn btn-success" (click)="$event.preventDefault();pop.hide();$event.stopPropagation();">Abbrechen</button>
         </ng-template> 
-        <i class="material-icons" style="color:#FF8000;" title="Löschen" placement="left" popoverTitle="Willst du den Timer wirklich löschen?" [popover]="popContent">
+        <i class="material-icons" style="color:#FF8000;" title="Löschen" [outsideClick]="true" #pop="bs-popover" placement="left" popoverTitle="Willst du den Timer wirklich löschen?" [popover]="popContent">
             delete
         </i>
     </div>
