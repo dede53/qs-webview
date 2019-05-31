@@ -25,7 +25,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" *ngFor="let con of timer.conditions" [ngSwitch]="con.type">
                     <div *ngSwitchCase="'random'">Zufällig zwischen {{con.start.hour}}:{{con.start.minute}}h und {{con.stop.hour}}:{{con.stop.minute}}h</div>
-                    <div *ngSwitchCase="'time'">Um {{con.time.hour}}:{{con.time.minute}}h</div>
+                    <div *ngSwitchCase="'time'">Um {{con.time | date:'h:m'}}h</div>
                     <div *ngSwitchCase="'range'">Zwischen {{con.start.hour}}:{{con.start.minute}}h und {{con.stop.hour}}:{{con.stop.minute}}h</div>
                     <div *ngSwitchCase="'variable'">Wenn der Wert der Variablen {{con.id}} {{con.mode}} {{con.value}} ist</div>
                     <div *ngSwitchCase="'sun'">
