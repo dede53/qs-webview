@@ -5,7 +5,11 @@
 
 highcharts-chart {
     display: block;
-    height: 500px;
+    min-height: 500px;
+    height: 100%;
+}
+.card {
+    height: 100%;
 }
 .test{
 	-webkit-flex-flow: row wrap;
