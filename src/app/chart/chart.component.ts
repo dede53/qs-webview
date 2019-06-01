@@ -9,13 +9,15 @@ import NetworkgraphModule from 'highcharts/modules/networkgraph';
 import OrganizationModule from 'highcharts/modules/organization';
 
 Highcharts.setOptions({
-    title: {
-      style: {
-        color: 'tomato'
-      }
+    time: {
+        timezone: 'Europe/Berlin',
+        useUTC: false
     },
-    legend: {
-      enabled: false
+    lang: {
+        loading: 'Lade die Daten...',
+        weekdays: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"],
+        shortMonths: ["Jan", "Feb", "März", "April", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
+        months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
     }
 });
 
@@ -32,8 +34,10 @@ export class ChartComponent implements OnInit{
 
     hours:number = 192;
     saveInstance(chart: Highcharts.Chart) {
-        console.log(chart);
         this.globalVar.user.chart = chart;
+        if(this.globalVar.user.chartOptions.series.length == 0){
+            this.globalVar.user.chart.showLoading();
+        }
     }
     getTempHistory(hours){
         this.globalVar.user.chart.zoomOut();
