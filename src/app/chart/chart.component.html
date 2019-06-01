@@ -13,24 +13,16 @@
             </div>
         </div>
     </div>
-    <!-- <chart *ngIf="!globalVar.user.hideChart" [options]="globalVar.user.chartOptions" (load)="saveInstance($event.context)"></chart>
-     -->
     <highcharts-chart
-    *ngIf="!globalVar.user.hideChart"
         [Highcharts]="Highcharts"
         [options]="globalVar.user.chartOptions"
         [(update)]="globalVar.user.updateFlag"
         (chartInstance)="saveInstance($event)"
+        [oneToOne]="true"
     ></highcharts-chart>
     <div *ngIf="globalVar.activeUser.varChart.length == 0" class="card-body">
-        <!-- <div *ngIf="globalVar.user.hideChart && globalVar.activeUser.varChart.length > 0" role="alert" class="alert alert-info"> -->
-            <!-- Unterumständen keine Daten verfügbar. Ist die speicher-Funktion der Variablen aktiviert? -->
-        <!-- </div> -->
         <div role="alert" class="alert alert-info">
             Du hast in den Einstellungen keine Datenpunkte für das Diagram ausgewählt.
         </div>
     </div>
-    <!-- <chart [options]="globalVar.user.chartOptions" (load)="saveInstance($event.context)"></chart>  -->
-    <!-- <chart *ngIf="globalVar.activeUser.varChart.length > 0" [options]="globalVar.user.chartOptions" (load)="saveInstance($event.context)"></chart>  -->
-    <!-- <chart [options]="globalVar.user.chartOptions" type="StockChart"></chart> -->
 </div>
