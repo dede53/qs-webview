@@ -57,7 +57,8 @@ export class AppComponent {
             
             this.joinedRoom = user.name;
             this.socket.emit('room:join', user);
-            this.socket.emit('variables:chart', { user: user.id, hours: user.chartHour });
+            // this.socket.emit('variables:chart', { user: user.id, hours: user.chartHour });
+            this.socket.emit("variables:chartNew", {"user":this.globalVar.activeUser, "start":Math.round(new Date().getTime() - 1000 * 60 * 60 * 24), "end":Math.round(new Date().getTime())});
     }
 
     // loaded = [];
@@ -157,14 +158,25 @@ export class AppComponent {
             console.log("Verbindung zum Server hergestellt");
             this.globalVar.loading = false;
         })
-        
+
         this.socket.on("varChart", data => {
             if (data.get.length > 0) {
-                this.globalVar.user.chartOptions.series = data.get;
+                // this.globalVar.user.chartOptions.navigator.series.data = data.get.data;
+                // this.globalVar.user.chartOptions.series = data.get;
                 this.globalVar.user.updateFlag = true;
                 if (this.globalVar.user.chart) {
                     this.globalVar.user.chart.hideLoading();
                 }
+            }
+        });
+        this.socket.on("varChartSerie", data => {
+            console.log(this.globalVar.user.chartDataMode);
+            // this.globalVar.user.chartOptions.navigator.series.data = data.get.data;
+            if(this.globalVar.user.chartDataMode){
+                this.globalVar.user.chart.series[1].setData(data.get.data);
+                this.globalVar.user.chartDataMode = false;
+            }else{
+                this.globalVar.user.chart.addSeries(data.get);
             }
         });
 

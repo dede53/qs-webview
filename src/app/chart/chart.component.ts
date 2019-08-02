@@ -3,10 +3,14 @@ import { GlobalObjectsService } from "../app.service.global";
 import { SocketService } from "../app.service";
 // import { ChartModule }              from 'angular2-highcharts';
 import * as Highcharts from 'highcharts';
+import StockModule from 'highcharts/modules/stock';
+
 // needed for a workaround: https://github.com/highcharts/highcharts/issues/10463 4.4.2019
 import HighchartsMoreModule from 'highcharts/highcharts-more';
 import NetworkgraphModule from 'highcharts/modules/networkgraph';
 import OrganizationModule from 'highcharts/modules/organization';
+
+StockModule(Highcharts);
 
 Highcharts.setOptions({
     time: {
@@ -47,5 +51,16 @@ export class ChartComponent implements OnInit{
             this.globalVar.user.chart.showLoading();
         }
     }
-    ngOnInit(){}
+    ngOnInit(){
+      this.globalVar.user.chartOptions.xAxis[0].events = {
+        afterSetExtremes: (e)=>{
+            console.log(e);
+            this.globalVar.user.chartDataMode = true;
+            this.globalVar.user.chart.showLoading();
+            if(this.globalVar.activeUser.varChart.length > 0){
+                this.socket.emit("variables:chartNew", {"user":this.globalVar.activeUser, "start":Math.round(e.min), "end":Math.round(e.max)});
+            }
+        }
+      }
+    }
 }

@@ -15,6 +15,7 @@
     </div>
     <highcharts-chart
         [Highcharts]="Highcharts"
+        [constructorType]="'stockChart'"
         [options]="globalVar.user.chartOptions"
         [(update)]="globalVar.user.updateFlag"
         (chartInstance)="saveInstance($event)"
