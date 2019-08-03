@@ -24,6 +24,10 @@ p, ul, ol, li, span, h1, h2, h3, h4,h5, h6, small, select{
 	font-weight: 400!important;
 }
 
+h1, h2, h3, h4, h5, h6{
+	line-height: 2em;
+}
+
 .btnOn{
 	background-color:#c0ffc0;
 	background-color: #c0d7ff;
