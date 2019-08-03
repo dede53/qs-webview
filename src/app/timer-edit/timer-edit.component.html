@@ -210,7 +210,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 Aktionen
-                <i (click)='switchAll("timers", timer)' title="Aktionen zum testen jetzt ausführen!" class="material-icons">play_circle_outline</i>
+                <i (click)='switchAll("timers", timer)' *ngIf="timer.id" title="Aktionen zum testen jetzt ausführen!" class="material-icons">play_circle_outline</i>
             </div>
             <ul class="list-group list-group-flush">
                 <li *ngIf="timer.actions.length == 0" class="list-group-item list-group-item-info">
