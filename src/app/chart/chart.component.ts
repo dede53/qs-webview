@@ -1,7 +1,6 @@
 import { Component, OnInit }                from '@angular/core';
 import { GlobalObjectsService } from "../app.service.global";
 import { SocketService } from "../app.service";
-// import { ChartModule }              from 'angular2-highcharts';
 import * as Highcharts from 'highcharts';
 // needed for a workaround: https://github.com/highcharts/highcharts/issues/10463 4.4.2019
 import HighchartsMoreModule from 'highcharts/highcharts-more';

@@ -15,27 +15,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule }   from '@angular/router';
-// import { ChartModule }              from 'angular2-highcharts';
-// import { HighchartsStatic }         from 'angular2-highcharts/dist/HighchartsService';
 
 import { HighchartsChartModule } from 'highcharts-angular';
-
-/*
-// import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
-declare var require: any;
-export function highchartsFactory() {
-    var Highcharts = require('highcharts/highstock');
-    Highcharts.setOptions({
-		global : {
-			useUTC : false
-		},
-        lang:{
-            loading:"Versuche Daten zu laden..."
-        }
-    });
-    return Highcharts;
-}
-*/
 
 
 import { AppComponent }                                             from './app.component';
