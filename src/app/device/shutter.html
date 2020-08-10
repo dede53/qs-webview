@@ -1,15 +1,13 @@
 <div class="test d-flex justify-content-end">
 	<div class="mr-auto devicename">{{device.name}}</div>
-    <div class="mr-1 devicename">{{device.status == 0 ? 'geschlossen' : 'geöffnet'}}</div>
+    <div class="mr-1 devicename">{{device.status == 0 ? 'geschlossen' : 'geöffnet'}} </div>
 	<div class="d-flex" style="max-width:100%;">
 		<button
-            class="btnGrey unselectable"
-            (click)="switchDevice({id: device.deviceid, status: 1})"
+			class="btnGrey unselectable"
+            (click)="switchDevice({id: device.deviceid, status: 0})"
 			>
-				<!-- style="fill:#389B20" -->
-
 			<p class="buttonLabel">
-				{{device.buttonLabelOn}}
+				{{device.buttonLabelOff}}
 			</p>
 		</button>
 		<button
@@ -21,11 +19,11 @@
 			</p>
 		</button>
 		<button
-			class="btnGrey unselectable"
-            (click)="switchDevice({id: device.deviceid, status: 0})"
+            class="btnGrey unselectable"
+            (click)="switchDevice({id: device.deviceid, status: 1})"
 			>
 			<p class="buttonLabel">
-				{{device.buttonLabelOff}}
+				{{device.buttonLabelOn}}
 			</p>
 		</button>
 	</div>

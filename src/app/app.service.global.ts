@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
 import { Router, ActivatedRoute, Params } from "@angular/router";
-
-function afterSetExtremes(e){
-    console.log(e);
-}
+import { SocketService } from "./app.service";
 
 @Injectable()
 export class GlobalObjectsService {
+    constructor( private socket: SocketService){}
     user = {
         active: [],
         alerts: {},
@@ -34,6 +32,35 @@ export class GlobalObjectsService {
                     }
                 }
             },
+    
+            scrollbar: {
+                liveRedraw: false
+            },
+            rangeSelector: {
+                buttons: [{
+                    type: 'hour',
+                    count: 1,
+                    text: '1h'
+                }, {
+                    type: 'day',
+                    count: 1,
+                    text: '1d'
+                }, {
+                    type: 'month',
+                    count: 1,
+                    text: '1m'
+                }, {
+                    type: 'year',
+                    count: 1,
+                    text: '1y'
+                }, {
+                    type: 'all',
+                    text: 'All'
+                }],
+                inputEnabled: false, // it supports only days
+                selected: 4 // all
+            },
+    
             plotOptions: {
                 series: {
                     marker: {
@@ -67,12 +94,7 @@ export class GlobalObjectsService {
                         "fontSize": "16px"
                     }
                 },
-                events: {
-                    afterSetExtremes: function (e) {
-                        console.log(Math.round(e.min));
-                        console.log(Math.round(e.max));
-                    }
-                },
+                events: {},
                 dateTimeLabelFormats: {
                     second: '%d.%m<br/>%H:%M:%S',
                     minute: '%d.%m<br/>%H:%M',
@@ -81,7 +103,8 @@ export class GlobalObjectsService {
                     week: '%d.%m.%Y',
                     month: '%m.%Y',
                     year: '%Y'
-                }
+                },
+                minRange: 3600 * 1000 // one hour
             }],
             series: [],
             yAxis: [{
@@ -123,7 +146,8 @@ export class GlobalObjectsService {
             }
         },
         chart: void{},
-        updateFlag: true
+        updateFlag: true,
+        chartDataMode: false 
     };
     activeUser = {
         name:"",
@@ -135,5 +159,4 @@ export class GlobalObjectsService {
         background: ""
     };
     loading: boolean = true;
-    constructor() {}
 }

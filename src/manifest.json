@@ -1,0 +1,19 @@
+{
+    "name": "QuickSwitch-Webview",
+    "short_name": "QS-Webview",
+    "icons": [
+        {
+            "src": "/assets/favicon.ico",
+            "sizes": "128x128",
+            "type": "image/ico"
+        },{
+            "src": "/assets/icon-512*512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/index",
+    "display": "standalone",
+    "background_color": "#3E4EB8",
+    "theme_color": "#FFFFFF"
+}

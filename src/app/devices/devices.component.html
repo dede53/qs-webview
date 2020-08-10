@@ -45,7 +45,8 @@
                             {{room.room.name}}
                         </a>
                         <div class="">
-                            <button class="btnOn" id="btnOn{{room.room.id}}" (click)='switchRoom($event, {"room":room.room,"status":"1"})' >An</button><button class="btnOff" id="btnOff{{room.room.id}}" (click)='switchRoom($event, {"room":room.room,"status":"0"})' >Aus</button>
+                            <button class="btnOff" id="btnOff{{room.room.id}}" (click)='switchRoom($event, {"room":room.room,"status":"0"})' >Aus</button>
+                            <button class="btnOn" id="btnOn{{room.room.id}}" (click)='switchRoom($event, {"room":room.room,"status":"1"})' >An</button>
                         </div>
                     </div>
                 </div>

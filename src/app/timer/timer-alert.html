@@ -67,7 +67,7 @@
         </li>
     </ul>
 </div>-->
-<div class="card card-{{action.action.type}}">
+<div class="card card-{{action.action.messageType}}">
     <div class="card-header d-flex justify-content-end">
             <input [(ngModel)]="action.action.title" class="mr-auto" type="text" [disabled]="!timer.edit" [ngClass]="{'edit': !timer.edit}" placeholder="Titel">
             <select name="activeUser" [(ngModel)]="action.action.user" [disabled]="!timer.edit" [ngClass]="{'edit': !timer.edit}">
@@ -75,7 +75,7 @@
                         {{ user.name }}
                     </option>
                 </select>
-            <select name="alertType" [(ngModel)]="action.action.type" class="" [disabled]="!timer.edit" [ngClass]="{'edit': !timer.edit}">
+            <select name="alertType" [(ngModel)]="action.action.messageType" class="" [disabled]="!timer.edit" [ngClass]="{'edit': !timer.edit}">
                 <option *ngFor="let type of alertTypen" [ngValue]="type.value">{{type.name}}</option>
             </select>
             <i class="material-icons" style="margin:auto 0;" (click)="globalVar.deleteAction(timer.id, action.type, index)">delete</i>
