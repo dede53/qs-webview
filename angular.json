@@ -29,8 +29,8 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-                "socket.io-client",
-                "highcharts"
+              "socket.io-client",
+              "highcharts"
             ]
           },
           "configurations": {

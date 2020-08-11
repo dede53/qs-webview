@@ -1,12 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-/*
-import { NgbModule } from '@ngx-bootstrap/ng-bootstrap';
-import { NgbdDatepickerBasic } from './datepicker/datepicker.component';
-import { NgbdModalBasic } from './modal/modal.component';
-*/
-
 import { ModalModule }      from 'ngx-bootstrap/modal';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CollapseModule }   from 'ngx-bootstrap/collapse';
@@ -36,26 +30,15 @@ import { TimerShowComponent }                                       from './time
 import { AlertsComponent }                                          from "./alerts/alerts.component";
 import { ChartComponent }                                           from './chart/chart.component';
 
-import { TimerEditModule } from "./timer-edit/timer-edit.module";
 import { VariablesComponent } from './variables/variables.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 declare var require: any;
-/*
-    export function highchartsFactory() {
-      const hc = require('highcharts');
-      const dd = require('highcharts/modules/drilldown');
-      dd(hc);
-
-      return hc;
-    }
-*/
 
 @NgModule({
   declarations: [
     AppComponent
     ,ChatComponent
-    // ,DatepickerModule
-    // ,ModalModule
     ,ActiveDevicesComponent
     ,FavoritDevicesComponent
     ,DevicesComponent
@@ -78,15 +61,11 @@ declare var require: any;
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    // ChartModule,
     ModalModule.forRoot(),
     DatepickerModule.forRoot(),
     CollapseModule.forRoot(),
     PopoverModule.forRoot(),
     BsDropdownModule.forRoot(),
-   // , require('highcharts/modules/exporting'),
-    // ChartModule.forRoot(require('highcharts')),
-    // ChartModule.forRoot(Test124),
     HighchartsChartModule,
     RouterModule.forRoot([
       {
@@ -118,19 +97,13 @@ declare var require: any;
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
       scrollOffset: [0, 64] // [x, y] - adjust scroll offset
-    })
+    }),
+    BrowserAnimationsModule
   ],
   exports:[RouterModule],
   providers: [
     SocketService
     ,GlobalObjectsService
-/*  
-    ,
-   {
-      provide: HighchartsStatic,
-      useFactory: highchartsFactory
-    } */
-    //,TimerFunctionsService
   ],
   bootstrap: [
     AppComponent
