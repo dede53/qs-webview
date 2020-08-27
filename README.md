@@ -1,6 +1,35 @@
 # qs-webview
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
+This adapter is for [QuickSwitch2.0](https://github.com/dede53/QuickSwitch2.0) and is depending on it -> you cannot use it without!
+
+It provides the following features:
+
+* multi-user-interface
+* chart history of saved data (e.g temperatures, amount of rain, used water/gas/energy)
+* list of all available devices sorted by room
+* notifications
+* edit/add/remove timer (do an action depending on time/variable/calender/etc) 
+* favorite devices depending the user
+* list of all active devices
+* chat integration of a [telegram](http://telegram.org) group
+* Functions depending on the selected user:
+    * List of most used devices
+    * List of interesting Datasets (temperatures, rainmeter,...)
+    * background image
+    * groups of devices
+    * countdowns (a device switches of after a certain amount of time)
+
+## Screenshots
+The main view:
+![Screenshot of the main view](screenshots/home.png)
+The main view without the favorite panel on the left:
+![Screenshot of the main view](screenshots/home-simple.png)
+The Interface to manage automated actions:
+![Screenshot of the timer view](screenshots/timer.png)
+
+# Developer informations:
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
 
 ## Development server
 
