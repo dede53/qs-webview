@@ -26,6 +26,8 @@ The main view without the favorite panel on the left:
 ![Screenshot of the main view](screenshots/home-simple.png)
 The Interface to manage automated actions:
 ![Screenshot of the timer view](screenshots/timer.png)
+The chart view:
+![Screenshot of the Chartview](screenshots/chart.png)
 
 # Developer informations:
 
