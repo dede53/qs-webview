@@ -1,4 +1,4 @@
-import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
+import { Component, Pipe, PipeTransform, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SocketService }            from '../app.service';
 import { GlobalObjectsService }     from "../app.service.global";
@@ -10,16 +10,26 @@ import { ViewportScroller } from '@angular/common';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-/*  message = {
-    time:"",
-    content:"",
-    author:"",
-    message:"",
-    name:"",
-  };*/
-  newMessage: FormGroup;
-  showFullscreen = {};
-  constructor(private socket: SocketService, public globalVar: GlobalObjectsService, private formBuilder: FormBuilder, private viewportScroller: ViewportScroller) { }
+    /*  message = {
+        time:"",
+        content:"",
+        author:"",
+        message:"",
+        name:"",
+    };*/
+    newMessage: FormGroup;
+    showFullscreen = {};
+    constructor(private socket: SocketService, public globalVar: GlobalObjectsService, private formBuilder: FormBuilder, private viewportScroller: ViewportScroller) {
+        this.globalVar.user.chatMessagesEvent.subscribe((data) => {
+            if(data == "push"){
+                setTimeout(() => {
+                    this.scroll();
+                }, 70);
+            }
+        });
+    }
+    @ViewChild("bottom") bottom: ElementRef;
+
 
     save(){
         if(this.newMessage.value.message == ""){
@@ -33,10 +43,10 @@ export class ChatComponent implements OnInit {
             message: "",
             type: 1
         });
+        this.scroll();
     }
 
     open(message){
-        console.log(message);
         if(this.showFullscreen[message.id] == undefined){
             this.globalVar.loading = true;
             this.showFullscreen[message.id] = true;
@@ -44,27 +54,14 @@ export class ChatComponent implements OnInit {
             this.globalVar.loading = false;
             this.showFullscreen[message.id] = undefined;
         }
-        /*
-        
-            padding-right: 10px;
-            position: fixed;
-            top: 0px;
-            z-index: 10000;
-            left: auto;
-            height: auto;
-        
-        */
-        
     }
 
     scroll(){
-        // https://stackoverflow.com/questions/51010195/not-a-valid-selector-error-when-trying-to-link-to-a-section-within-the-current-p
-        this.viewportScroller.scrollToAnchor("message" + this.globalVar.user.chatMessages[this.globalVar.user.chatMessages.length - 1 ].time);
-        console.log("message" + this.globalVar.user.chatMessages[this.globalVar.user.chatMessages.length - 1 ].time);
+        this.bottom.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     loadOldMessages(){
-        this.socket.emit('messages:loadOld', this.globalVar.user.chatMessages[this.globalVar.user.chatMessages.length - 1 ].time);
+        this.socket.emit('messages:loadOld', this.globalVar.user.chatMessages[0].time);
     }
     ngOnInit() {
         this.newMessage = this.formBuilder.group({
@@ -73,22 +70,3 @@ export class ChatComponent implements OnInit {
         });
     }
 }
-
-/*
-@Pipe({name:'chatText', pure: false})
-export class chatText implements PipeTransform{
-    transform(value: any, args: any[] = null): any {
-        var pattern = new RegExp('^(https?:\/\/)?'+ // protocol
-            '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
-            '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
-            '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
-            '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
-            '(\#[-a-z\d_]*)?$','i'); // fragment locater
-        if(!pattern.test(value)) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-}
-*/

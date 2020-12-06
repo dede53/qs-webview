@@ -83,10 +83,15 @@ declare var require: any;
       {
         path: 'editTimer',
         loadChildren: "./timer-edit/timer-edit.module#TimerEditModule"
+        // loadChildren: () => import('./timer-edit/timer-edit.module').then(m => m.TimerEditModule)
       },
       {
         path: 'chart',
         component: ChartComponent
+      },
+      {
+        path: 'chat',
+        component: ChatComponent
       },
       {
         path: '**',

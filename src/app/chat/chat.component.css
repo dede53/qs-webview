@@ -5,7 +5,7 @@ button {
     cursor:pointer;
 }
 img {
-    width: 100%;
+    width: 20%;
     padding-right: 10px;
 }
 .showFullscreen {
@@ -22,4 +22,17 @@ img {
 }
 ul, h3{
     cursor: default;
+}
+li:hover {
+    background-color: #d8eff3;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.date{
+    white-space: nowrap;
+    margin: 0;
 }

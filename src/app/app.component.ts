@@ -139,10 +139,9 @@ export class AppComponent {
                     console.log(data.type);
                     break;
             }
-            // this.loaded.push(data.masterType);
-            // if(data.masterType === "favoritDevices"){
-            // this.loading = false;
-            // }
+            if(this.globalVar.user[data.masterType + "Event"] != undefined){
+                this.globalVar.user[data.masterType + "Event"].next(data.type);
+            }
         });
         this.socket.disconnect(data => {
             console.log("Verbindung zum Server verloren");
@@ -169,9 +168,6 @@ export class AppComponent {
         });
 
         this.socket.emit("messages:loadOld", new Date().getTime());
-        /*     this.socket.on('chatMessages', data => {
-            this.messages.splice(0, 0, data[data.type]);
-        }) */
         this.socket.on('moreMessagesAvailable', data => {
             this.moreMessagesAvailable = data;
         });

@@ -1,48 +1,35 @@
-<div class="card">
+<div class="card h-100">
 	<!--<div class="card-header">-->
 	<!--</div>-->
 	<div class="card-body">
-		<h3>Chat</h3>
-		<ul class="list-group" style="max-height:300px; overflow:auto;">
-			<li class="m-0" id="message{{message.time}}" *ngFor="let message of globalVar.user.chatMessages">
-                <p class="sliderText">
-<!--                     <span id="italic" title="{{message.time | date:'medium'}}">{{message.time}}:</span> {{message.author}}: -->
-                    <span id="italic" title="{{message.time | date:'medium'}}">{{message.time | date:'d. MMM | HH:mm'}}:</span> {{message.author}}:
- 				    <span *ngIf="message.type == '1'">
-                        {{message.message}}
-				    </span>
-                    <span *ngIf="message.type == '2'">
-                        <a target="_blank" href="{{message.message}}">{{message.message}}</a>
+        <h3>Chat</h3>
+            <ul class="list-group" style="order:2;max-height:700px; overflow:auto;">
+
+                <div class="" *ngIf="!globalVar.user.moreMessagesAvailable">
+                    <div class="alert alert-info" role="alert">Keine weiteren Nachrichten verfügbar!</div>
+                </div>
+                <div class="" *ngIf="globalVar.user.moreMessagesAvailable">
+                    <div class="alert alert-info" role="alert">
+                        <a class="alert-link" (click) = "loadOldMessages()" >ältere Nachrichten Laden</a>
+                    </div>
+                </div>
+                <li class="px-1" id="message{{message.time}}" *ngFor="let message of globalVar.user.chatMessages">
+                    <span class="d-flex justify-content-between">
+                        <div>
+                            <span class="font-weight-bold">{{message.author}}:</span>
+                            <p *ngIf="message.type == '1'">{{message.message}}</p>
+                            <a *ngIf="message.type == '2'" target="_blank" href="{{message.message}}">{{message.message}}</a>
+                            <span *ngIf="message.type == '3'">
+                                <br>
+                                <img src="{{message.message}}" [ngClass]="showFullscreen[message.id] == true ? 'showFullscreen' : ''" (click)=open(message)>
+                            </span>
+                        </div>
+                        <p id="italic" class="text-muted date" title="{{message.time | date:'medium'}}">{{message.time | date:'d. MMM | HH:mm'}}</p>
                     </span>
-                    <span *ngIf="message.type == '3'">
-                        <img src="{{message.message}}" [ngClass]="showFullscreen[message.id] == true ? 'showFullscreen' : ''" (click)=open(message)>
-                    </span>
-                </p>
-            </li>
-			<li class="" *ngIf="!globalVar.user.moreMessagesAvailable">
-				<div class="alert-sm alert-info" role="alert">Keine weiteren Nachrichten verfügbar!</div>
-			</li>
-			<li class="" *ngIf="globalVar.user.moreMessagesAvailable">
-				<div class="alert-sm alert-info" role="alert">
-					<a class="alert-link" (click) = "loadOldMessages()" >ältere Nachrichten Laden</a>
-				</div>
-			</li>
-		</ul>
-		<br>
-<!-- 		<form style="text-align:right;" [formGroup]="newMessage">
-			<input type="text" class="form-control"	name="message"	id="message" 	[formControl]="message" placeholder="Neue Nachricht eingeben" >
-			<input type="text" class="form-control"	name="type"	id="type" 	[(formControl)]="type" placeholder="Neue Nachricht eingeben" >
-			<br>
-			{{type.value}}
-			<div class="btn-group" btnRadioGroup formControlName="type">
-				<label class="btn btn-success" btnRadio="1" tabindex="0" role="button">Text</label>
-				<label class="btn btn-success" btnRadio="2" tabindex="0" role="button">Link</label>
-			</div>
-            <label class="btn-group btn-group-sm">
-                <button class="btn btn-secondary btn-sm" (click)="save()">Senden</button>
-            </label>
-		</form> -->
-		<form [formGroup]="newMessage" style="text-align:right;">
+                </li>
+                <span #bottom></span>
+            </ul>
+		<form [formGroup]="newMessage" style="text-align:right;order:3">
 			<input type="text" class="form-control mb-3"	formControlName="message" placeholder="Neue Nachricht eingeben" >
 			<div class="btn-group btn-group-sm mr-3">
 				<label class="btn btn-secondary" [ngClass]="{active: newMessage.value.type == 1}">
@@ -56,8 +43,7 @@
 			</div>
 			<label class="btn-group btn-group-sm">
 				<button class="btn btn-secondary" (click)="save()">Senden</button>
-				<button class="btn btn-secondary" (click)="scroll()">Scroll</button>
-				<a [routerLink]="['./']" fragment="message1556710620497" (click)="scroll()">Testing</a>
+				<!-- <button class="btn btn-secondary" (click)="scroll()">Scroll</button> -->
 			</label>
 		</form>
 

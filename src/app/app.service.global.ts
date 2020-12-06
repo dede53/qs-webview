@@ -1,5 +1,7 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute, Params } from "@angular/router";
+import { EventEmitter } from 'events';
+import { Observable, Subject } from 'rxjs';
 import { SocketService } from "./app.service";
 
 @Injectable()
@@ -9,6 +11,7 @@ export class GlobalObjectsService {
         active: [],
         alerts: {},
         chatMessages: [],
+        chatMessagesEvent: new Subject(),
         countdowns: {},
         devicelist: [],
         devices:{},
