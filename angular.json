@@ -31,7 +31,8 @@
             "allowedCommonJsDependencies": [
               "socket.io-client",
               "highcharts"
-            ]
+            ],
+            "optimization": false
           },
           "configurations": {
             "production": {
@@ -110,5 +111,8 @@
       }
     }
   },
-  "defaultProject": "angular"
+  "defaultProject": "angular",
+  "cli": {
+    "analytics": false
+  }
 }
