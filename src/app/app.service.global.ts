@@ -40,30 +40,12 @@ export class GlobalObjectsService {
                 liveRedraw: false
             },
             rangeSelector: {
-                buttons: [{
-                    type: 'hour',
-                    count: 1,
-                    text: '1h'
-                }, {
-                    type: 'day',
-                    count: 1,
-                    text: '1d'
-                }, {
-                    type: 'month',
-                    count: 1,
-                    text: '1m'
-                }, {
-                    type: 'year',
-                    count: 1,
-                    text: '1y'
-                }, {
-                    type: 'all',
-                    text: 'All'
-                }],
                 inputEnabled: false, // it supports only days
                 selected: 4 // all
             },
-    
+            exporting: {
+                enabled: true
+            },
             plotOptions: {
                 series: {
                     marker: {
@@ -82,14 +64,9 @@ export class GlobalObjectsService {
             },
             xAxis: [{
                 type: 'datetime',
-                // lineColor:'#4d4d4d',
-                // tickColor:'#4d4d4d',
-                // minorGridLineWidth: 0,
-                // minorTickInterval: 3600 * 1000, // Hourly
-                // minorTickInterval: 'auto', // Hourly
-                // minorTickColor: '#4d4d4d',
-                // minorTickWidth: 1,
-                // minorTickLength: 7,
+                plotlines: [],
+                minorGridLineColor: '#9d9d9d',
+                minorTickWidth: 1,
                 labels: {
                     rotation: 0,
                     style: {

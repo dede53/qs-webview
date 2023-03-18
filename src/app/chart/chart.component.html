@@ -1,20 +1,22 @@
-<div class="card">
-    <div class="card-body test d-flex justify-content-end">
+<div class="card mb-2">
+    <div class="card-body test flex justify-between">
         
-        <h3 class="mr-auto">Chart</h3>
-        <div class="">
-            <div class="btn-group justify-content-end">
-                <button type="button" class="btn btn-secondary" (click)="getTempHistory(24)" [ngClass]="{active:globalVar.activeUser.chartHour === 24}" autocomplete="off" >24h</button>
-                <button type="button" class="btn btn-secondary" (click)="getTempHistory(48)" [ngClass]="{active:globalVar.activeUser.chartHour === 48}" autocomplete="off" >48h</button>
-                <button type="button" class="btn btn-secondary" (click)="getTempHistory(96)" [ngClass]="{active:globalVar.activeUser.chartHour === 96}" autocomplete="off" >96h</button>
+        <h3 class="text-2xl pl-1">Chart</h3>
+        <div *ngIf="globalVar.activeUser.varChart.length != 0">
+            <div class="btn-group flex justify-end">
+                <button type="button" class="btn btn-secondary" (click)="chartService.loadData(24)" [ngClass]="{active:globalVar.activeUser.chartHour === 24}" autocomplete="off" >24h</button>
+                <button type="button" class="btn btn-secondary" (click)="chartService.loadData(48)" [ngClass]="{active:globalVar.activeUser.chartHour === 48}" autocomplete="off" >48h</button>
+                <button type="button" class="btn btn-secondary" (click)="chartService.loadData(96)" [ngClass]="{active:globalVar.activeUser.chartHour === 96}" autocomplete="off" >96h</button>
                 <input type="number" class="form-control btn btn-secondary numberInput" min="0" [(ngModel)]="hours">
-                <button type="button" class="btn btn-secondary" (click)="getTempHistory(hours)">Los!</button>
-                <i class="material-icons btn btn-secondary" title="Reset Zoom" (click)="globalVar.user.chart.zoomOut()">zoom_out</i>
+                <button type="button" class="btn btn-secondary" (click)="chartService.loadData(hours)">Los!</button>
+                <i class="material-icons my-auto p-2 rounded-r btn-secondary" title="Reset Zoom" (click)="globalVar.user.chart.zoomOut()">zoom_out</i>
             </div>
         </div>
     </div>
     <highcharts-chart
+    *ngIf="globalVar.activeUser.varChart.length != 0"
         [Highcharts]="Highcharts"
+        [constructorType]="'stockChart'" 
         [options]="globalVar.user.chartOptions"
         [(update)]="globalVar.user.updateFlag"
         (chartInstance)="saveInstance($event)"

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { ModalModule }      from 'ngx-bootstrap/modal';
-import { DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CollapseModule }   from 'ngx-bootstrap/collapse';
 import { PopoverModule }    from 'ngx-bootstrap/popover';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -32,6 +32,8 @@ import { ChartComponent }                                           from './char
 
 import { VariablesComponent } from './variables/variables.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuItemComponent } from './menu-item/menu-item.component';
+import { ChartService } from './chart/chart.service';
 
 declare var require: any;
 
@@ -54,15 +56,14 @@ declare var require: any;
     ,TimersComponent
     ,TimerHeaderComponent
     ,TimerShowComponent
-    ,AlertsComponent, ChartComponent, VariablesComponent
+    ,AlertsComponent, ChartComponent, VariablesComponent, MenuItemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
     ModalModule.forRoot(),
-    DatepickerModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     CollapseModule.forRoot(),
     PopoverModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -82,8 +83,8 @@ declare var require: any;
       },
       {
         path: 'editTimer',
-        loadChildren: "./timer-edit/timer-edit.module#TimerEditModule"
-        // loadChildren: () => import('./timer-edit/timer-edit.module').then(m => m.TimerEditModule)
+        // loadChildren: "./timer-edit/timer-edit.module#TimerEditModule"
+        loadChildren: () => import('./timer-edit/timer-edit.module').then(m => m.TimerEditModule)
       },
       {
         path: 'chart',
@@ -107,7 +108,8 @@ declare var require: any;
   ],
   exports:[RouterModule],
   providers: [
-    SocketService
+    ChartService
+    ,SocketService
     ,GlobalObjectsService
   ],
   bootstrap: [

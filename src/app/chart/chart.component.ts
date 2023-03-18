@@ -1,12 +1,15 @@
 import { Component, OnInit }                from '@angular/core';
 import { GlobalObjectsService } from "../app.service.global";
 import { SocketService } from "../app.service";
-import * as Highcharts from 'highcharts';
-// needed for a workaround: https://github.com/highcharts/highcharts/issues/10463 4.4.2019
-import HighchartsMoreModule from 'highcharts/highcharts-more';
-import NetworkgraphModule from 'highcharts/modules/networkgraph';
-import OrganizationModule from 'highcharts/modules/organization';
+import * as Highcharts from 'highcharts/highstock';
 
+import Exporting from 'highcharts/modules/exporting';
+// needed for a workaround: https://github.com/highcharts/highcharts/issues/10463 4.4.2019
+// import HighchartsMoreModule from 'highcharts/highcharts-more';
+// import NetworkgraphModule from 'highcharts/modules/networkgraph';
+// import OrganizationModule from 'highcharts/modules/organization';
+import { ChartService } from './chart.service';
+Exporting(Highcharts);
 Highcharts.setOptions({
     time: {
         timezone: 'Europe/Berlin',
@@ -27,7 +30,7 @@ Highcharts.setOptions({
 })
 export class ChartComponent implements OnInit{
 
-    constructor(public globalVar: GlobalObjectsService, private socket: SocketService) {}
+    constructor(public globalVar: GlobalObjectsService, private socket: SocketService, public chartService: ChartService) {}
     // highcharts new april 2019
     Highcharts: typeof Highcharts = Highcharts;
 
@@ -35,14 +38,6 @@ export class ChartComponent implements OnInit{
     saveInstance(chart: Highcharts.Chart) {
         this.globalVar.user.chart = chart;
         if(this.globalVar.user.chartOptions.series.length == 0){
-            this.globalVar.user.chart.showLoading();
-        }
-    }
-    getTempHistory(hours){
-        this.globalVar.user.chart.zoomOut();
-		    this.globalVar.activeUser.chartHour = hours;
-        this.socket.emit('variables:chart', {user: this.globalVar.activeUser.id, hours: hours});
-        if(this.globalVar.user.chart != undefined){
             this.globalVar.user.chart.showLoading();
         }
     }
