@@ -1,9 +1,9 @@
-<div class="test d-flex justify-content-end">
-	<div class="mr-auto devicename">{{device.name}}</div>
-    <div class="mr-1 devicename">{{device.status * 100}}%</div>
-	<div class="d-flex" style="max-width:100%;">
+<div class="test flex justify-end">
+	<div class="mr-auto">{{device.name}}</div>
+    <div class="mr-1">{{device.status * 100}}%</div>
+	<div class="flex justify-end w-100">
 		<button
-            class="unselectable"
+            class="bg-gray-300 grow max-w-[80px] unselectable"
             (click)="switchDevice({id: device.deviceid, status: 0})"
 			>
 			<p class="buttonLabel">
@@ -11,7 +11,7 @@
 			</p>
 		</button>
 		<button
-			class="unselectable"
+			class="bg-gray-300 grow max-w-[80px] unselectable"
             (click)="switchDevice({id: device.deviceid, status: 0.2})"
 			>
 			<p class="buttonLabel">
@@ -19,7 +19,7 @@
 			</p>
 		</button>
 		<button
-			class="unselectable"
+			class="bg-gray-300 grow max-w-[80px] unselectable"
             (click)="switchDevice({id: device.deviceid, status: 0.4})"
 			>
 			<p class="buttonLabel">
@@ -27,7 +27,7 @@
 			</p>
 		</button>
 		<button
-			class="unselectable"
+			class="bg-gray-300 grow max-w-[80px] unselectable"
             (click)="switchDevice({id: device.deviceid, status: 0.6})"
 			>
 			<p class="buttonLabel">
@@ -35,7 +35,7 @@
 			</p>
 		</button>
 		<button
-			class="unselectable"
+			class="bg-gray-300 grow max-w-[80px] unselectable"
             (click)="switchDevice({id: device.deviceid, status: 0.8})"
 			>
 			<p class="buttonLabel">
@@ -43,7 +43,7 @@
 			</p>
 		</button>
 		<button
-			class="unselectable"
+			class="bg-gray-300 grow max-w-[80px] unselectable"
             (click)="switchDevice({id: device.deviceid, status: 1})"
 			>
 			<p class="buttonLabel">

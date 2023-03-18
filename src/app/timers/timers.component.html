@@ -1,7 +1,7 @@
-<div class="card" style="margin-bottom: .75rem;">
+<div class="card mb-2">
     <div class="card-body">
-        <div class="d-flex justify-content-between">
-            <h3>Timer</h3>
+        <div class="flex justify-between">
+            <h3 class="text-2xl pl-1">Timer</h3>
             <i class="material-icons" title="Hinzufügen" (click)="addTimer()">add_alert</i>
         </div>
         <app-timer-show [timer]="timer" *ngFor="let timer of globalVar.user.timers | ObjNgFor"></app-timer-show> 

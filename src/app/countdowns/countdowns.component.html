@@ -1,8 +1,6 @@
-<div class="card">
-    <!--<div class="card-header">-->
-    <!--</div>-->
+<div class="card mb-2">
     <div class="card-body">
-        <h3>Countdowns</h3>
+        <h3 class="text-2xl pl-1">Countdowns</h3>
         <ul class="list-group" style="max-height:230px; overflow:auto;">
             <li class="list-group-item d-flex justify-content-start" *ngFor="let countdown of globalVar.user.countdowns | ObjNgFor">
                 <span>{{countdown.device.name}} ({{countdown.device.Raum}}) um {{countdown.time | date:'HH:mm'}} {{countdown.status ? countdown.device.buttonLabelOn :  countdown.device.buttonLabelOff}}</span>

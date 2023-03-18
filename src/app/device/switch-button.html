@@ -1,8 +1,8 @@
-<div class="test d-flex justify-content-end">
-	<div class="mr-auto devicename">{{device.name}}</div>
-	<div class="d-flex" style="max-width:100%;">
+<div class="test flex justify-end">
+	<div class="my-auto mr-auto">{{device.name}}</div>
+	<div class="flex grow justify-end">
 		<button
-			class="btnOff unselectable d-flex justify-content-center"
+			class="btnOff unselectable flex justify-center grow max-w-[80px]"
             (click)="switchDevice({id: device.deviceid, status: 0})"
 			>
             <i *ngIf="device.showStatus" class="material-icons boxOff">check_box{{device.status == "0" ? "":"_outline_blank"}}</i>
@@ -11,13 +11,11 @@
 			</p>
 		</button>
 		<button
-			class="btnOn unselectable d-flex justify-content-center"
+			class="btnOn unselectable flex justify-center grow max-w-[80px]"
             (click)="switchDevice({id: device.deviceid, status: 1})"
 			>
             <i *ngIf="device.showStatus" class="material-icons boxOn">check_box{{device.status == "0" ? "_outline_blank":""}}</i>
 			<p class="buttonLabel">
-			<!-- style="fill:#389B20" -->
-
 				{{device.buttonLabelOn}}
 			</p>
 		</button>
