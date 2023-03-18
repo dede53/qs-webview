@@ -1,20 +1,46 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SocketService } from './app.service';
 import { GlobalObjectsService } from "./app.service.global";
-
-import { TimerEditComponent } from "./timer-edit/timer-edit.component";
+import { ChartService } from './chart/chart.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [GlobalObjectsService]
+    providers: [GlobalObjectsService, ChartService]
 })
 
 export class AppComponent {
     joinedRoom: String = "";
+    menu = [
+        {
+            name: "Home",
+            link: "home",
+            icon: "home"
+        },
+        {
+            name: "Geräte",
+            link: "devices",
+            icon: "power_settings_new"
+        },
+        {
+            name: "Timer",
+            link: "timers",
+            icon: "alarm"
+        },
+        {
+            name: "Chart",
+            link: "chart",
+            icon: "bar_chart"
+        },
+        {
+            name: "Chat",
+            link: "chat",
+            icon: ""
+        }
+    ]
 
-    constructor(private socket: SocketService, public globalVar: GlobalObjectsService) { }
+    constructor(private socket: SocketService, public globalVar: GlobalObjectsService, public chartService: ChartService) { }
     private setCookie(cname, cvalue, exdays) {
         let d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -57,7 +83,7 @@ export class AppComponent {
             
             this.joinedRoom = user.name;
             this.socket.emit('room:join', user);
-            this.socket.emit('variables:chart', { user: user.id, hours: user.chartHour });
+            this.chartService.loadData(user.chartHour);
     }
 
     // loaded = [];
@@ -158,10 +184,25 @@ export class AppComponent {
         })
         
         this.socket.on("varChart", data => {
+            let hours = this.globalVar.activeUser.chartHour;
+            let minValue = new Date().getTime() - hours * 60 * 60 * 1000
+            let maxValue = new Date().getTime()
+            var dt = new Date(minValue)
+            dt.setUTCHours(new Date().getTimezoneOffset()/60);
+            dt.setUTCMinutes(0);
+            dt.setUTCSeconds(0);
+            dt.setUTCMilliseconds(0);
             if (data.get.length > 0) {
                 this.globalVar.user.chartOptions.series = data.get;
                 this.globalVar.user.updateFlag = true;
                 if (this.globalVar.user.chart) {
+                    for(; dt<=new Date(maxValue); dt.setDate(dt.getDate()+1)){
+                        this.globalVar.user.chart.xAxis[0].addPlotLine({
+                            color: '#9d9d9d',
+                            width: 1,
+                            value: new Date(dt)
+                        });
+                    }
                     this.globalVar.user.chart.hideLoading();
                 }
             }
